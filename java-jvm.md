@@ -93,7 +93,20 @@
 
 ## 2.7运行时常量池
 
-1. 是方法区的一部分(1.7之前
+1. 运行时常量池是方法区的一部分。Class 文件中除了有类的版本、字段、方法、接口等描述信息外，还有常量池信息（用于存放编译期生成的各种字面量和符号引用）
+
+   既然运行时常量池时方法区的一部分，自然受到方法区内存的限制，当常量池无法再申请到内存时会抛出 OutOfMemoryError 异常。
+
+   **JDK1.7及之后版本的 JVM 已经将运行时常量池从方法区中移了出来，在 Java 堆（Heap）中开辟了一块区域存放运行时常量池。** 
+
+   ![](http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-9-14/26038433.jpg)
+   ——图片来源：https://blog.csdn.net/wangbiao007/article/details/78545189
+
+   
+
+   推荐阅读：
+
+   - 《Java 中几种常量池的区分》： [https://blog.csdn.net/qq_26222859/article/details/73135660](
 
 ## 2.8直接内存
 
@@ -266,12 +279,12 @@ public class FinalizeEscapeGC {
 - serial 的单线程相比其他收集齐,做的很好,简单高效,
 - 运行在Client模式jvm是一个很好的选择
 
-### 4.4.2parnew(并行)(多线程)(新生代)
+### 4.4.2parNew(并行)(多线程)(新生代)
 
 - Serial 多线程版,是运行在Server模式中中**新生代**
 - 是除了Serial 之外在jdk1.8 之前唯一能和CMS收集齐结合的 (CMS是1.5**老年代**)
 
-### 4.4.3parallel scavenge(并行)(多线程)(新生代)
+### 4.4.3parallel scavenge(并行)(多线程)(新生代)/'pærəlɛl/ /'skævɪndʒ/
 
 - **新生代**收集器
 - 和cms收集器的关注点不同,cms 是关注的是gc停顿时间

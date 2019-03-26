@@ -100,7 +100,7 @@
 
 ![](C:\Users\27660\Desktop\2019年03月20日迎战魔都\JavaGuide\elasticsearch\es写入磁盘细节操作.jpg)
 
-- 数据先写入buffer中
+- 数据先写入buffer中,在 buffer 里的时候数据是搜索不到的；同时将数据写入 translog 日志文件。
 - buffer快满的了,或者过一段时间,内存中的buffer数据将会被refresh到segment file中,此时要先进入os cache中,这个过程就是refresh
 - 如果buffer没有数据,不会执行refresh工作,如果有每一秒执行一次,把数据refresh到segment file中
 - es是`near real-time`,可以通过restful api 或者java api手动执行一次refesh,手动讲buffer中的数据刷新到os cache中,让数据立马搜索到,只要数据输入os cache,buffer就会被清空,不会保留在buffer中,数据在translog保留,
